@@ -15,7 +15,11 @@ export default function RentHomePage() {
     const fetchHomes = async () => {
       try {
         const district = searchParams.get('district') || '';
-        const res = await axios.get(`http://localhost:5000/api/properties/homes?district=${district}`);
+       const API_URL = import.meta.env.VITE_API_URL;
+
+const res = await axios.get(
+  `${API_URL}/api/properties/homes?district=${district}`
+);
         setHomes(res.data);
       } catch (err) {
         console.error(err);

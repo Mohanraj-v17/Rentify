@@ -20,7 +20,10 @@ export default function SignupPage() {
       // Simulated verification process
       setTimeout(async () => {
         try {
-          await axios.post('http://localhost:5000/api/auth/signup', {
+          const API_URL = import.meta.env.VITE_API_URL;
+
+await axios.post(
+  `${API_URL}/api/auth/signup`, {
             username: formData.username,
             email: formData.email,
             password: formData.password

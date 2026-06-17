@@ -11,7 +11,11 @@ export default function AdminPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/admin/login', formData);
+      const API_URL = import.meta.env.VITE_API_URL;
+      const res = await axios.post(
+  `${API_URL}/api/admin/login`,
+  formData
+);
       localStorage.setItem('admin_token', res.data.token);
       navigate('/admin-control');
     } catch (err) {

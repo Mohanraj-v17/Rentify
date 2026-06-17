@@ -14,6 +14,7 @@ const TAMIL_NADU_DISTRICTS = [
 ];
 
 export default function AddHomePage() {
+  
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     ownerName: '', contactNumber: '', whatsappNumber: '', gmapsLink: '', 
@@ -39,13 +40,18 @@ export default function AddHomePage() {
   const removeImage = (index) => {
     setImages(images.filter((_, i) => i !== index));
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setStatus('Uploading...');
-      await axios.post('http://localhost:5000/api/properties/add-home', { ...formData, images });
-      setStatus('Success! Waiting for Admin Approval.');
+      const API_URL = import.meta.env.VITE_API_URL;
+       await axios.post(
+       `${API_URL}/api/properties/add-home`,
+        { ...formData, images }
+        );      
+        setStatus('Success! Waiting for Admin Approval.');
       setTimeout(() => navigate('/home'), 2000);
     } catch (err) {
       setStatus('Error adding home.');

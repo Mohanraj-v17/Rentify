@@ -43,7 +43,11 @@ export default function AddShopPage() {
     e.preventDefault();
     try {
       setStatus('Uploading...');
-      await axios.post('http://localhost:5000/api/properties/add-shop', { ...formData, images });
+      const API_URL = import.meta.env.VITE_API_URL;
+      await axios.post(
+      `${API_URL}/api/properties/add-shop`,
+      { ...formData, images }
+     );
       setStatus('Success! Waiting for Admin Approval.');
       setTimeout(() => navigate('/home'), 2000);
     } catch (err) {

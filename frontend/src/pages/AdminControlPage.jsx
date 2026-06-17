@@ -13,13 +13,13 @@ export default function AdminControlPage() {
 
   const fetchData = async () => {
     try {
-      const statsRes = await axios.get('http://localhost:5000/api/admin/stats');
+      const statsRes = await axios.get('https://rentify-6uzv.onrender.com/api/admin/stats');
       setStats(statsRes.data);
 
-      const homesRes = await axios.get('http://localhost:5000/api/admin/pending-homes');
+      const homesRes = await axios.get('https://rentify-6uzv.onrender.com/admin/pending-homes');
       setPendingHomes(homesRes.data);
 
-      const shopsRes = await axios.get('http://localhost:5000/api/admin/pending-shops');
+      const shopsRes = await axios.get('https://rentify-6uzv.onrender.com/admin/pending-shops');
       setPendingShops(shopsRes.data);
     } catch (err) {
       console.error(err);
@@ -37,7 +37,10 @@ export default function AdminControlPage() {
 
   const handleAction = async (type, action, id) => {
     try {
-      await axios[action === 'approve' ? 'put' : 'delete'](`http://localhost:5000/api/admin/${action}-${type}/${id}`);
+      const API_URL = import.meta.env.VITE_API_URL;
+      await axios[action === 'approve' ? 'put' : 'delete'](
+  `${API_URL}/api/admin/${action}-${type}/${id}`
+);
       fetchData();
     } catch (err) {
       alert('Error processing action');

@@ -15,7 +15,11 @@ export default function RentShopPage() {
     const fetchShops = async () => {
       try {
         const district = searchParams.get('district') || '';
-        const res = await axios.get(`http://localhost:5000/api/properties/shops?district=${district}`);
+      const API_URL = import.meta.env.VITE_API_URL;
+
+const res = await axios.get(
+  `${API_URL}/api/properties/shops?district=${district}`
+);
         setShops(res.data);
       } catch (err) {
         console.error(err);
