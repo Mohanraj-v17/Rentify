@@ -29,7 +29,7 @@ await axios.post(
             password: formData.password
           });
           setStatus('Email verified! Account created successfully.');
-          setTimeout(() => navigate('/login'), 2000);
+          setTimeout(() => navigate('/home'), 2000);
         } catch (err) {
           setStatus(err.response?.data?.message || 'Error creating account');
         }
